@@ -151,6 +151,60 @@ func (curso Curso) verLibres() {
 
 func (curso Curso) verMejoresPromedios() {
 
+	var promedio float32
+	promedios := make(map[string]float32)
+
+	for _, each := range curso.Alumno {
+
+		promedio = 0
+		for _, nota := range each.Notas {
+			promedio += nota
+		}
+		promedio = promedio / float32(len(each.Notas))
+		promedios[each.Nombre] = promedio
+	}
+
+	// guardamos las keys del mapa en un slice para poder obtener el primer valor de los promedios
+	// i := 0
+	// keys := make([]string, len(promedios))
+	// for k := range promedios {
+	// 	keys[i] = k
+	// 	i++
+	// }
+	// fmt.Print(keys)
+
+	mayor := [3]float32{0, 0, 0}
+	names := [3]string{}
+
+	for times := 0; times < 3; times++ {
+		for key, value := range promedios {
+			if times == 0 {
+				if value > mayor[0] {
+					mayor[0] = value
+					names[0] = key
+				}
+			} else if times == 1 {
+				if value > mayor[1] && value < mayor[0] {
+					mayor[1] = value
+					names[1] = key
+				}
+			} else {
+				if value < mayor[0] && value < mayor[1] && value > mayor[2] {
+					mayor[2] = value
+					names[2] = key
+				}
+			}
+		}
+	}
+	fmt.Println("Los mayores promedios del curso son...")
+	for index := 0; index < 3; index++ {
+		fmt.Println("Alumno:", names[index], " - Promedio:", mayor[index])
+	}
+}
+
+func (curso Curso) verCapacidad() {
+	razonCapacidad := float32(len(curso.Alumno)) / float32(curso.CantidadMaxEstudiantes) * 100
+	fmt.Println("El curso usa", razonCapacidad, "% de su capacidad - (", len(curso.Alumno), "/", curso.CantidadMaxEstudiantes, "alumnos.")
 }
 
 func main() {
@@ -199,6 +253,7 @@ func main() {
 	flagSwitch := true
 
 	for flagSwitch == true {
+		fmt.Println()
 		fmt.Println("1 - Ver alumnos.")
 		fmt.Println("2 - Dar ALTA a alumno.")
 		fmt.Println("3 - Dar BAJA a alumno.")
@@ -208,7 +263,9 @@ func main() {
 		fmt.Println("7 - Ver top 3 alumnos.")
 		fmt.Println("8 - Ver capacidad de curso.")
 		fmt.Println("0 - Salir.")
+		fmt.Print(">")
 		fmt.Scan(&opcion)
+		fmt.Println()
 
 		switch opcion {
 		case 1:
@@ -240,6 +297,8 @@ func main() {
 			curso1.verLibres()
 		case 7:
 			curso1.verMejoresPromedios()
+		case 8:
+			curso1.verCapacidad()
 		case 0:
 			flagSwitch = false
 		}
