@@ -25,11 +25,15 @@ type Curso struct {
 }
 
 func (curso Curso) logAlumnos() {
+	if len(curso.Alumno) == 0 {
+		fmt.Println("No existen alumnos registrados en este curso!")
+		return
+	}
 	for _, each := range curso.Alumno {
-		fmt.Print(each.Nombre, " - ")
-		fmt.Print(each.ID, " - ")
-		fmt.Print(each.Notas, " - ")
-		fmt.Print(each.Faltas)
+		fmt.Print("Nombre:", each.Nombre)
+		fmt.Print("  - ID:", each.ID)
+		fmt.Print(" - Notas:", each.Notas)
+		fmt.Print(" - Total faltas:", each.Faltas)
 		fmt.Println()
 	}
 	fmt.Println()
@@ -207,47 +211,8 @@ func (curso Curso) verCapacidad() {
 	fmt.Println("El curso usa", razonCapacidad, "% de su capacidad - (", len(curso.Alumno), "/", curso.CantidadMaxEstudiantes, "alumnos.")
 }
 
-func main() {
+func (aula *Curso) cursoSelected() {
 
-	curso1 := Curso{
-		ID:                     "001",
-		Nombre:                 "Curso 1",
-		Aula:                   1,
-		CantidadMaxEstudiantes: 30,
-		Alumno: []Alumno{
-			{
-				ID:     "001-1",
-				Nombre: "Juan",
-				Notas:  []float32{8, 2, 10, 6},
-				Faltas: 2,
-			}, {
-				ID:     "001-2",
-				Nombre: "Marcos",
-				Notas:  []float32{5, 6, 7, 4},
-				Faltas: 2,
-			}, {
-				ID:     "001-3",
-				Nombre: "Valeria",
-				Notas:  []float32{3, 2, 2, 1},
-				Faltas: 7,
-			}, {
-				ID:     "001-4",
-				Nombre: "Florencia",
-				Notas:  []float32{8, 8, 9, 10},
-				Faltas: 0,
-			}, {
-				ID:     "001-5",
-				Nombre: "Esteban",
-				Notas:  []float32{3, 10, 6, 1},
-				Faltas: 4,
-			},
-		},
-		Profesor: Profesor{
-			ID:         "100-M",
-			Nombre:     "Mauricio",
-			Antiguedad: 8,
-		},
-	}
 	var opcion int
 	var IDAlumno string
 	flagSwitch := true
@@ -269,9 +234,9 @@ func main() {
 
 		switch opcion {
 		case 1:
-			curso1.logAlumnos()
+			aula.logAlumnos()
 		case 2:
-			flag := curso1.altaAlumno()
+			flag := aula.altaAlumno()
 			if flag == true {
 				fmt.Println("El alumno fue dado de alta exitosamente!")
 			} else {
@@ -280,7 +245,7 @@ func main() {
 		case 3:
 			fmt.Print("Ingrese el ID del alumno: ")
 			fmt.Scan(&IDAlumno)
-			flag := curso1.bajaAlumno(IDAlumno)
+			flag := aula.bajaAlumno(IDAlumno)
 			if flag == true {
 				fmt.Println("El alumno de ID", IDAlumno, "fue dado de baja!")
 			} else {
@@ -290,17 +255,105 @@ func main() {
 		case 4:
 			fmt.Print("Ingrese el ID del alumno: ")
 			fmt.Scan(&IDAlumno)
-			curso1.modificarAlumno(IDAlumno)
+			aula.modificarAlumno(IDAlumno)
 		case 5:
-			curso1.verPromedioBajo()
+			aula.verPromedioBajo()
 		case 6:
-			curso1.verLibres()
+			aula.verLibres()
 		case 7:
-			curso1.verMejoresPromedios()
+			aula.verMejoresPromedios()
 		case 8:
-			curso1.verCapacidad()
+			aula.verCapacidad()
 		case 0:
 			flagSwitch = false
+		default:
+			fmt.Println("Opcion invalida!")
+		}
+	}
+}
+
+func main() {
+
+	var cursoSeleccionado int
+	flagMain := true
+
+	for flagMain == true {
+		fmt.Println()
+		fmt.Println("Seleccione el curso...")
+		fmt.Println("1 - Seleccionar curso 1.")
+		fmt.Println("2 - Seleccionar curso 2.")
+		fmt.Println("3 - Seleccionar curso 3.")
+		fmt.Println("0 - Finalizar.")
+		fmt.Scan(&cursoSeleccionado)
+		fmt.Println()
+
+		switch cursoSeleccionado {
+		case 1:
+
+			curso1 := Curso{
+				ID:                     "001",
+				Nombre:                 "Curso 1",
+				Aula:                   1,
+				CantidadMaxEstudiantes: 30,
+				Alumno: []Alumno{
+					{
+						ID:     "001-1",
+						Nombre: "Juan",
+						Notas:  []float32{8, 2, 10, 6},
+						Faltas: 2,
+					}, {
+						ID:     "001-2",
+						Nombre: "Marcos",
+						Notas:  []float32{5, 6, 7, 4},
+						Faltas: 2,
+					}, {
+						ID:     "001-3",
+						Nombre: "Valeria",
+						Notas:  []float32{3, 2, 2, 1},
+						Faltas: 7,
+					}, {
+						ID:     "001-4",
+						Nombre: "Florencia",
+						Notas:  []float32{8, 8, 9, 10},
+						Faltas: 0,
+					}, {
+						ID:     "001-5",
+						Nombre: "Esteban",
+						Notas:  []float32{3, 10, 6, 1},
+						Faltas: 4,
+					},
+				},
+				Profesor: Profesor{
+					ID:         "100-M",
+					Nombre:     "Mauricio",
+					Antiguedad: 8,
+				},
+			}
+			curso1.cursoSelected()
+		case 2:
+			curso2 := Curso{
+				ID:                     "002",
+				Nombre:                 "Curso 2",
+				Aula:                   2,
+				CantidadMaxEstudiantes: 20,
+				Alumno:                 []Alumno{},
+				Profesor:               Profesor{ID: "200-U", Nombre: "Ulises", Antiguedad: 4},
+			}
+			curso2.cursoSelected()
+		case 3:
+			curso3 := Curso{
+				ID:                     "003",
+				Nombre:                 "Curso 3",
+				Aula:                   3,
+				CantidadMaxEstudiantes: 15,
+				Alumno:                 []Alumno{},
+				Profesor:               Profesor{ID: "300-G", Nombre: "Giovana", Antiguedad: 2},
+			}
+			curso3.cursoSelected()
+		case 0:
+			flagMain = false
+		default:
+			fmt.Println("Seleccione un curso existente!")
 		}
 	}
 }
