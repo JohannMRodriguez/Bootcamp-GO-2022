@@ -31,7 +31,7 @@ func (curso Curso) logAlumnos() {
 	}
 	for _, each := range curso.Alumno {
 		fmt.Print("Nombre:", each.Nombre)
-		fmt.Print("  - ID:", each.ID)
+		fmt.Print(" - ID:", each.ID)
 		fmt.Print(" - Notas:", each.Notas)
 		fmt.Print(" - Total faltas:", each.Faltas)
 		fmt.Println()
@@ -208,7 +208,7 @@ func (curso Curso) verMejoresPromedios() {
 
 func (curso Curso) verCapacidad() {
 	razonCapacidad := float32(len(curso.Alumno)) / float32(curso.CantidadMaxEstudiantes) * 100
-	fmt.Println("El curso usa", razonCapacidad, "% de su capacidad - (", len(curso.Alumno), "/", curso.CantidadMaxEstudiantes, "alumnos.")
+	fmt.Println("El curso usa", razonCapacidad, "% de su capacidad -", len(curso.Alumno), "/", curso.CantidadMaxEstudiantes, "alumnos.")
 }
 
 func (aula *Curso) cursoSelected() {
