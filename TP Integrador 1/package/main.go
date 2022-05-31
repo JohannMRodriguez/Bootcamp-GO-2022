@@ -2,31 +2,28 @@ package main
 
 import (
 	"fmt"
-	"hash/fnv"
 
-	"integrador.com/events/avatar"
+	"integrador.com/events/encoder"
+	// "integrador.com/events/generator"
 )
 
-// hash function -> gives a hash number for each string passed
-func hash(s string) uint32 {
-	h := fnv.New32a()
-	h.Write([]byte(s))
-	return h.Sum32()
-}
-
 func main() {
-
 	// declare my variables
 	var PersonalInfo string
-	// userAvatar := &avatar.Information{}
 
 	// get the personal info required
 	fmt.Println("Please, enter you email, IP address or public password...")
 	fmt.Scan(&PersonalInfo)
 
-	// get the personal hash number with the
-	PersonalHashNumber := hash(PersonalInfo)
-	fmt.Println(PersonalInfo, PersonalHashNumber, avatar.Test)
+	user := []encoder.CryptoEncoder{encoder.Information{}}
+
+	// get the personal hash number with encoder package
+	PersonalHashNumber, err := user[0].EncodeInformation(PersonalInfo)
+	if err == nil {
+		fmt.Println(PersonalHashNumber, err)
+	} else {
+		fmt.Printf("unexpected error generating hash number %s", err)
+	}
 
 	// generate the avatar to the given hash number
 

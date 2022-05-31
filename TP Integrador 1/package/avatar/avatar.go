@@ -1,9 +1,7 @@
 package avatar
 
-var Test = "teste package avatar"
-
-type cryptoEncoder interface {
-	EncodeInformation(strInformation string) (encodedInformation []byte, err error)
+type CryptoEncoder interface {
+	EncodeInformation(strInformation string) (encodedInformation uint32, err error)
 }
 
 type imageGenerator interface {
@@ -11,7 +9,7 @@ type imageGenerator interface {
 }
 
 type Service struct {
-	encoder   cryptoEncoder
+	encoder   CryptoEncoder
 	generator imageGenerator
 }
 
@@ -20,6 +18,6 @@ type Information struct {
 	userHashNumber uint32
 }
 
-func (s *Service) GeneratAndSaveAvatar(information Information) error {
+func (s *Service) GenerateAndSaveAvatar(information Information) error {
 	return nil
 }
