@@ -3,22 +3,22 @@ package encoder
 import "hash/fnv"
 
 type CryptoEncoder interface {
-	EncodeInformation(strInformation string) (encodedInformation uint32, err error)
+	EncodeInformation(strInformation string) (encodedInformation uint64, err error)
 }
 
 type Information struct {
 	UserInfo       string
-	UserHashNumber uint32
+	UserHashNumber uint64
 }
 
 // hash function -> gives a hash number for each string passed
-func hash(s string) uint32 {
-	h := fnv.New32a()
+func hash(s string) uint64 {
+	h := fnv.New64a()
 	h.Write([]byte(s))
-	return h.Sum32()
+	return h.Sum64()
 }
 
-func (UserInfo Information) EncodeInformation(UserInput string) (EncodedInformation uint32, Err error) {
+func (UserInfo Information) EncodeInformation(UserInput string) (EncodedInformation uint64, Err error) {
 	EncodedInformation = hash(UserInput)
 	return EncodedInformation, nil
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"integrador.com/events/encoder"
+	"integrador.com/events/generator"
 	// "integrador.com/events/generator"
 )
 
@@ -18,13 +19,17 @@ func main() {
 	user := []encoder.CryptoEncoder{encoder.Information{}}
 
 	// get the personal hash number with encoder package
-	PersonalHashNumber, err := user[0].EncodeInformation(PersonalInfo)
-	if err == nil {
-		fmt.Println(PersonalHashNumber, err)
+	PersonalHashNumber, errGeneratingHashNumber := user[0].EncodeInformation(PersonalInfo)
+	if errGeneratingHashNumber == nil {
+		fmt.Println(PersonalHashNumber, errGeneratingHashNumber)
 	} else {
-		fmt.Printf("unexpected error generating hash number %s", err)
+		fmt.Printf("unexpected error generating hash number %s", errGeneratingHashNumber)
 	}
 
 	// generate the avatar to the given hash number
-
+	userImage := []generator.ImageGenerator{generator.Information{}}
+	errGeneratingImage := userImage[0].GenerateImage(PersonalHashNumber)
+	if errGeneratingImage != nil {
+		fmt.Printf("unexpected error generating icon %s", errGeneratingImage)
+	}
 }
