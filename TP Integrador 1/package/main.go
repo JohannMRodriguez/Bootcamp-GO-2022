@@ -5,7 +5,6 @@ import (
 
 	"integrador.com/events/encoder"
 	"integrador.com/events/generator"
-	// "integrador.com/events/generator"
 )
 
 func main() {
@@ -17,6 +16,7 @@ func main() {
 	fmt.Scan(&PersonalInfo)
 
 	user := []encoder.CryptoEncoder{encoder.Information{}}
+	fmt.Println(user[0])
 
 	// get the personal hash number with encoder package
 	PersonalHashNumber, errGeneratingHashNumber := user[0].EncodeInformation(PersonalInfo)
