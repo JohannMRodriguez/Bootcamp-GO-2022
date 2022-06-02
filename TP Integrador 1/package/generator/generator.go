@@ -1,6 +1,7 @@
 package generator
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 	"image/png"
@@ -9,21 +10,23 @@ import (
 	"time"
 )
 
-var Test = "Generator test"
+var UserImage string
 
 type ImageGenerator interface {
-	GenerateImage(encodedInformation uint64) error
+	GenerateImage(encodedInformation uint32) error
 }
 
 type Information struct {
 	UserInfo       string
-	UserHashNumber uint64
+	UserHashNumber uint32
 }
 
-func (userInfo Information) GenerateImage(encodedInformation uint64) error {
+func (userInfo Information) GenerateImage(encodedInformation uint32) error {
 
-	width := 500
-	height := 500
+	UserImage = fmt.Sprint(encodedInformation) + ".png"
+
+	width := 100
+	height := 100
 
 	upLeft := image.Point{0, 0}
 	lowRight := image.Point{width, height}
@@ -60,35 +63,35 @@ func (userInfo Information) GenerateImage(encodedInformation uint64) error {
 	randomIdenticon := identicons[randomIndex]
 
 	// Set color for each pixel.
-	actualWidth := 100
-	actualHeight := 100
+	actualWidth := width / 5
+	actualHeight := height / 5
 	lastHeight := 0
 	lastWidth := 0
 
 	for index := 0; index < 25; index++ {
 		switch {
 		case index == 0 || index == 1 || index == 2 || index == 3 || index == 4:
-			lastHeight, actualHeight = 0, 100
+			lastHeight, actualHeight = 0, int(height/5)
 		case index == 5 || index == 6 || index == 7 || index == 8 || index == 9:
-			lastHeight, actualHeight = 100, 200
+			lastHeight, actualHeight = int(height/5), int((height*2)/5)
 		case index == 10 || index == 11 || index == 12 || index == 13 || index == 14:
-			lastHeight, actualHeight = 200, 300
+			lastHeight, actualHeight = int((height*2)/5), int((height*3)/5)
 		case index == 15 || index == 16 || index == 17 || index == 18 || index == 19:
-			lastHeight, actualHeight = 300, 400
+			lastHeight, actualHeight = int((height*3)/5), int((height*4)/5)
 		case index == 20 || index == 21 || index == 22 || index == 23 || index == 24:
-			lastHeight, actualHeight = 400, 500
+			lastHeight, actualHeight = int((height*4)/5), width
 		}
 		switch {
 		case index == 0 || index == 5 || index == 10 || index == 15 || index == 20:
-			lastWidth, actualWidth = 0, 100
+			lastWidth, actualWidth = 0, int(width/5)
 		case index == 1 || index == 6 || index == 11 || index == 16 || index == 21:
-			lastWidth, actualWidth = 100, 200
+			lastWidth, actualWidth = int(width/5), int((width*2)/5)
 		case index == 2 || index == 7 || index == 12 || index == 17 || index == 22:
-			lastWidth, actualWidth = 200, 300
+			lastWidth, actualWidth = int((width*2)/5), int((width*3)/5)
 		case index == 3 || index == 8 || index == 13 || index == 18 || index == 23:
-			lastWidth, actualWidth = 300, 400
+			lastWidth, actualWidth = int((width*3)/5), int((width*4)/5)
 		case index == 4 || index == 9 || index == 14 || index == 19 || index == 24:
-			lastWidth, actualWidth = 400, 500
+			lastWidth, actualWidth = int((width*4)/5), width
 		}
 		if randomIdenticon[index] == 1 {
 			for y := lastHeight; y < actualHeight; y++ {
@@ -105,8 +108,8 @@ func (userInfo Information) GenerateImage(encodedInformation uint64) error {
 		}
 	}
 	// Encode as PNG.
-	f, _ := os.Create("imagetest.png")
-	png.Encode(f, img)
+	file, _ := os.Create(UserImage)
+	png.Encode(file, img)
 
 	return nil
 }

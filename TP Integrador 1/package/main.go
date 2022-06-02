@@ -10,26 +10,26 @@ import (
 func main() {
 	// declare my variables
 	var PersonalInfo string
+	// users := service.getRegisteredUsers()
 
 	// get the personal info required
 	fmt.Println("Please, enter you email, IP address or public password...")
 	fmt.Scan(&PersonalInfo)
 
-	user := []encoder.CryptoEncoder{encoder.Information{}}
-	fmt.Println(user[0])
+	getUserHashNumber := []encoder.CryptoEncoder{encoder.Information{}}
 
 	// get the personal hash number with encoder package
-	PersonalHashNumber, errGeneratingHashNumber := user[0].EncodeInformation(PersonalInfo)
-	if errGeneratingHashNumber == nil {
-		fmt.Println(PersonalHashNumber, errGeneratingHashNumber)
-	} else {
+	PersonalHashNumber, errGeneratingHashNumber := getUserHashNumber[0].EncodeInformation(PersonalInfo)
+	if errGeneratingHashNumber != nil {
 		fmt.Printf("unexpected error generating hash number %s", errGeneratingHashNumber)
-	}
-
-	// generate the avatar to the given hash number
-	userImage := []generator.ImageGenerator{generator.Information{}}
-	errGeneratingImage := userImage[0].GenerateImage(PersonalHashNumber)
-	if errGeneratingImage != nil {
-		fmt.Printf("unexpected error generating icon %s", errGeneratingImage)
+	} else {
+		user := generator.Information{UserInfo: PersonalInfo, UserHashNumber: PersonalHashNumber}
+		getUserIdenticon := []generator.ImageGenerator{generator.Information{}}
+		errGeneratingImage := getUserIdenticon[0].GenerateImage(user.UserHashNumber)
+		if errGeneratingImage != nil {
+			fmt.Println("something went wrong creating your avatar :(")
+		} else {
+			fmt.Println("Your avatar was successfull\nWelcome user", generator.UserImage)
+		}
 	}
 }
