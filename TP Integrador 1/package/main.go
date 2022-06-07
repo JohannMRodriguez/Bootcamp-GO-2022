@@ -7,32 +7,37 @@ import (
 	"integrador.com/events/generator"
 )
 
-var Users map[uint32]string
+type cryptoEncoder interface {
+	EncodeInformation(strInformation string) (encodedInformation uint32, err error)
+}
+
+type imageGenerator interface {
+	BuildAndSaveImage(encodedInformation uint32) error
+}
+
+type Information struct {
+	userInput      string
+	userHashNumber uint32
+}
 
 func main() {
-	// declare my variables
+
 	var PersonalInfo string
-	// users := service.getRegisteredUsers()
 
 	// get the personal info required
 	fmt.Println("Please, enter you email, IP address or public password...")
 	fmt.Scan(&PersonalInfo)
 
-	getUserHashNumber := []encoder.CryptoEncoder{encoder.Information{}}
+	newUser := Information{userInput: PersonalInfo}
 
-	// get the personal hash number with encoder package
-	PersonalHashNumber, errGeneratingHashNumber := getUserHashNumber[0].EncodeInformation(PersonalInfo)
-	if errGeneratingHashNumber != nil {
-		fmt.Printf("unexpected error generating hash number %s", errGeneratingHashNumber)
-	} else {
-		user := generator.Information{UserInfo: PersonalInfo, UserHashNumber: PersonalHashNumber}
-		getUserIdenticon := []generator.ImageGenerator{generator.Information{}}
-		errGeneratingImage := getUserIdenticon[0].GenerateImage(user.UserHashNumber)
-		if errGeneratingImage != nil {
+	getUserHashNumber, errUserHashNumber := encoder.EncodeInformation(newUser.userInput)
+	if errUserHashNumber == nil {
+		newUser.userHashNumber = getUserHashNumber
+		errUserAvatar := generator.BuildAndSaveImage(newUser.userHashNumber)
+		if errUserAvatar != nil {
 			fmt.Println("something went wrong creating your avatar :(")
 		} else {
-			fmt.Println("Your avatar was successfull created!\nWelcome user", generator.UserImage)
-			// Users[PersonalHashNumber] = generator.UserImage
+			fmt.Println("Your avatar was successfull created!\nWelcome user", newUser.userHashNumber)
 		}
 	}
 }

@@ -10,20 +10,9 @@ import (
 	"time"
 )
 
-var UserImage string
+func BuildAndSaveImage(encodedInformation uint32) error {
 
-type ImageGenerator interface {
-	GenerateImage(encodedInformation uint32) error
-}
-
-type Information struct {
-	UserInfo       string
-	UserHashNumber uint32
-}
-
-func (userInfo Information) GenerateImage(encodedInformation uint32) error {
-
-	UserImage = fmt.Sprint(encodedInformation) + ".png"
+	UserImage := fmt.Sprint(encodedInformation) + ".png"
 
 	width := 100
 	height := 100
