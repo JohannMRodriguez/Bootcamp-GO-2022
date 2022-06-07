@@ -26,6 +26,5 @@ func hash(s string) uint32 {
 
 func (info Information) EncodeInformation(UserInput string) (EncodedInformation uint32, Err error) {
 	EncodedInformation = hash(UserInput)
-	fmt.Println("Printing info {}: ", info, EncodedInformation)
 	return EncodedInformation, nil
 }

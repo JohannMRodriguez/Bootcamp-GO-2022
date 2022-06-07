@@ -108,7 +108,7 @@ func (userInfo Information) GenerateImage(encodedInformation uint32) error {
 		}
 	}
 	// Encode as PNG.
-	file, _ := os.Create(UserImage)
+	file, _ := os.Create("generator/img/" + UserImage)
 	png.Encode(file, img)
 
 	return nil

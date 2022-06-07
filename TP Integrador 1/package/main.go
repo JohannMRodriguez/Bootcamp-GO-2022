@@ -7,6 +7,8 @@ import (
 	"integrador.com/events/generator"
 )
 
+var Users map[uint32]string
+
 func main() {
 	// declare my variables
 	var PersonalInfo string
@@ -29,7 +31,8 @@ func main() {
 		if errGeneratingImage != nil {
 			fmt.Println("something went wrong creating your avatar :(")
 		} else {
-			fmt.Println("Your avatar was successfull\nWelcome user", generator.UserImage)
+			fmt.Println("Your avatar was successfull created!\nWelcome user", generator.UserImage)
+			// Users[PersonalHashNumber] = generator.UserImage
 		}
 	}
 }
