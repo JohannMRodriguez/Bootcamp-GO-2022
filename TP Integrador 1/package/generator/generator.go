@@ -10,12 +10,12 @@ import (
 	"time"
 )
 
-func BuildAndSaveImage(encodedInformation uint32) error {
+func GenerateImage(encodedInformation uint32) error {
 
 	UserImage := fmt.Sprint(encodedInformation) + ".png"
 
-	width := 100
-	height := 100
+	width := 50
+	height := 50
 
 	upLeft := image.Point{0, 0}
 	lowRight := image.Point{width, height}

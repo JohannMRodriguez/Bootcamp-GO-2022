@@ -3,41 +3,22 @@ package main
 import (
 	"fmt"
 
-	"integrador.com/events/encoder"
-	"integrador.com/events/generator"
+	"integrador.com/events/service"
 )
-
-type cryptoEncoder interface {
-	EncodeInformation(strInformation string) (encodedInformation uint32, err error)
-}
-
-type imageGenerator interface {
-	BuildAndSaveImage(encodedInformation uint32) error
-}
-
-type Information struct {
-	userInput      string
-	userHashNumber uint32
-}
 
 func main() {
 
-	var PersonalInfo string
+	var userInfo string
 
-	// get the personal info required
-	fmt.Println("Please, enter you email, IP address or public password...")
-	fmt.Scan(&PersonalInfo)
+	fmt.Println("Enter your ID, email or password...")
+	fmt.Scan(&userInfo)
 
-	newUser := Information{userInput: PersonalInfo}
-
-	getUserHashNumber, errUserHashNumber := encoder.EncodeInformation(newUser.userInput)
-	if errUserHashNumber == nil {
-		newUser.userHashNumber = getUserHashNumber
-		errUserAvatar := generator.BuildAndSaveImage(newUser.userHashNumber)
-		if errUserAvatar != nil {
-			fmt.Println("something went wrong creating your avatar :(")
-		} else {
-			fmt.Println("Your avatar was successfull created!\nWelcome user", newUser.userHashNumber)
-		}
+	newUser := &service.Service{}
+	errAvatar := newUser.GenerateAndSaveAvatar(&service.Information{UserData: userInfo})
+	if errAvatar != nil {
+		fmt.Println("Something went wrong creating yur Avatar!")
+		fmt.Println(errAvatar)
+	} else {
+		fmt.Println("Your Avatar was successful created!")
 	}
 }

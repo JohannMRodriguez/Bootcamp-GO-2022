@@ -31,9 +31,10 @@ func main() {
 	// fmt.Println()
 	// fmt.Printf("Area del circulo %.2f", circle1.area())
 
-	shapes := []shape{rectangle{3, 5}}
-	fmt.Printf("Area del rectangulo %.2f", shapes[0].area())
+	// shapes := []shape{rectangle{3, 5}}
+	// fmt.Printf("Area del rectangulo %.2f", shapes[0].area())
 	// fmt.Println()
 	// fmt.Printf("Area del circulo %.2f", shapes[1].area())
-
+	shape := rectangle{3, 5}
+	fmt.Println("Area del ractangulo: ", shape.area())
 }

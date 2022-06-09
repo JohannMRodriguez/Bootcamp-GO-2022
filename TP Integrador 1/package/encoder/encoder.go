@@ -1,17 +1,19 @@
 package encoder
 
 import (
+	"errors"
 	"hash/fnv"
 )
 
+var errorHashNumber = errors.New("error generating hash number")
+
 // hash function -> gives a hash number for each string passed
-func hash(s string) uint32 {
+func Hash(s string) (uint32, error) {
 	h := fnv.New32a()
 	h.Write([]byte(s))
-	return h.Sum32()
-}
-
-func EncodeInformation(strInformation string) (encodedInformation uint32, Err error) {
-	encodedInformation = hash(strInformation)
-	return encodedInformation, nil
+	if len([]byte(s)) != 0 {
+		return h.Sum32(), nil
+	} else {
+		return 0, errorHashNumber
+	}
 }
