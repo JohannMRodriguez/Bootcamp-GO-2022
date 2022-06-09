@@ -42,7 +42,13 @@ func GenerateImage(encodedInformation uint32) error {
 	identicon4 := []int{1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1}
 	identicon5 := []int{1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0}
 	identicon6 := []int{0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0}
-	identicons := [6][]int{identicon1, identicon2, identicon3, identicon4, identicon5, identicon6}
+	identicon7 := []int{1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1}
+	identicon8 := []int{1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1}
+	identicon9 := []int{0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1}
+	identicon10 := []int{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0}
+	identicon11 := []int{0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0}
+	identicon12 := []int{1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0}
+	identicons := [12][]int{identicon1, identicon2, identicon3, identicon4, identicon5, identicon6, identicon7, identicon8, identicon9, identicon10, identicon11, identicon12}
 
 	rand.Seed(time.Now().Unix())
 	randomIndex := rand.Intn(len(colors))
