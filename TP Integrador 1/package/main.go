@@ -16,7 +16,7 @@ func main() {
 	newUser := &service.Service{}
 	errAvatar := newUser.GenerateAndSaveAvatar(&service.Information{UserData: userInfo})
 	if errAvatar != nil {
-		fmt.Println("Something went wrong creating yur Avatar!")
+		fmt.Println("Something went wrong creating your Avatar!")
 		fmt.Println(errAvatar)
 	} else {
 		fmt.Println("Your Avatar was successful created!")

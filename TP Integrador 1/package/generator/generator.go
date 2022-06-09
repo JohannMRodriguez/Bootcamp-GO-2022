@@ -23,17 +23,13 @@ func GenerateImage(encodedInformation uint32) error {
 	img := image.NewRGBA(image.Rectangle{upLeft, lowRight})
 
 	// Colors are defined by Red, Green, Blue, Alpha uint8 values.
-	red := color.RGBA{255, 72, 48, 0xff}
-	blue := color.RGBA{25, 57, 183, 0xff}
-	green := color.RGBA{78, 183, 55, 0xff}
-	yellow := color.RGBA{234, 253, 0, 0xff}
-	orange := color.RGBA{226, 110, 21, 0xff}
-	purple := color.RGBA{136, 0, 253, 0xff}
-	pink := color.RGBA{253, 0, 160, 0xff}
-	cyan := color.RGBA{100, 200, 20, 0xff}
-	black := color.RGBA{0, 0, 0, 0xff}
-	lightGrey := color.RGBA{187, 186, 178, 0xff}
-	colors := []color.RGBA{red, blue, green, yellow, orange, purple, pink, cyan, black}
+	// black := color.RGBA{0, 0, 0, 0xff}
+	lightGrey := color.RGBA{236, 236, 232, 0xff}
+	rand.Seed(time.Now().Unix())
+	getRandomColorR := uint8(rand.Intn(255))
+	getRandomColorG := uint8(rand.Intn(255))
+	getRandomColorB := uint8(rand.Intn(255))
+	randomColor := color.RGBA{getRandomColorR, getRandomColorG, getRandomColorB, 0xff}
 
 	// predefine the identicons layouts
 	identicon1 := []int{1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1}
@@ -51,10 +47,7 @@ func GenerateImage(encodedInformation uint32) error {
 	identicons := [12][]int{identicon1, identicon2, identicon3, identicon4, identicon5, identicon6, identicon7, identicon8, identicon9, identicon10, identicon11, identicon12}
 
 	rand.Seed(time.Now().Unix())
-	randomIndex := rand.Intn(len(colors))
-	randomColor := colors[randomIndex]
-
-	randomIndex = rand.Intn(len(identicons))
+	randomIndex := rand.Intn(len(identicons))
 	randomIdenticon := identicons[randomIndex]
 
 	// Set color for each pixel.
