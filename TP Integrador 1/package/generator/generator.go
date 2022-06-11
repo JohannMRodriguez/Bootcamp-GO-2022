@@ -23,13 +23,9 @@ func GenerateImage(encodedInformation uint32) error {
 	img := image.NewRGBA(image.Rectangle{upLeft, lowRight})
 
 	// Colors are defined by Red, Green, Blue, Alpha uint8 values.
-	// black := color.RGBA{0, 0, 0, 0xff}
-	lightGrey := color.RGBA{236, 236, 232, 0xff}
 	rand.Seed(time.Now().Unix())
-	getRandomColorR := uint8(rand.Intn(255))
-	getRandomColorG := uint8(rand.Intn(255))
-	getRandomColorB := uint8(rand.Intn(255))
-	randomColor := color.RGBA{getRandomColorR, getRandomColorG, getRandomColorB, 0xff}
+	randomColor := color.RGBA{uint8(rand.Intn(255)), uint8(rand.Intn(255)), uint8(rand.Intn(255)), 0xff}
+	lightGrey := color.RGBA{236, 236, 232, 0xff}
 
 	// predefine the identicons layouts
 	identicon1 := []int{1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1}

@@ -6,7 +6,7 @@ import (
 )
 
 type cryptoEncoder interface {
-	EncodeInformation(strInformation string) (encodedInformation uint32)
+	EncodeInformation(strInformation string) (encodedInformation uint32, err error)
 }
 
 type imageGenerator interface {
