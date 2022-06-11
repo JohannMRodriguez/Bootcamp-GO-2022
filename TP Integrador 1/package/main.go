@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"integrador.com/events/service"
+	"integrador.com/service"
 )
 
 func main() {

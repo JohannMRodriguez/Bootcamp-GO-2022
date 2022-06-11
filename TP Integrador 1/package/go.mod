@@ -1,3 +1,3 @@
-module integrador.com/events
+module integrador.com
 
 go 1.18

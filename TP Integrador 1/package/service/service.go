@@ -1,8 +1,8 @@
 package service
 
 import (
-	"integrador.com/events/encoder"
-	"integrador.com/events/generator"
+	"integrador.com/encoder"
+	"integrador.com/generator"
 )
 
 type cryptoEncoder interface {
