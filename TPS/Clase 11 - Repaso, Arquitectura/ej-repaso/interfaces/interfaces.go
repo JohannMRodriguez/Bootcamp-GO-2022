@@ -6,7 +6,6 @@ import (
 )
 
 type ServiceInterface interface {
-	
-	Saludar(ctx *gin.Context) string
-	GetCursos(ctx *gin.Context) (models.Cursos, gin.H)
+	Saludar() string
+	GetCursos(models.Cursos) (models.Cursos, gin.H)
 }
