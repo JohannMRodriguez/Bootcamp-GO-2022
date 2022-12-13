@@ -1,0 +1,53 @@
+[
+  {
+    "userId": "30ecc27b-9df7-4dd3-b52f-d001e79bd042",
+    "courses": [
+      {
+        "desiredCourse": "curso 3.2",
+        "requiredCourse": "curso 2.2"
+      },
+      {
+        "desiredCourse": "curso 2.2",
+        "requiredCourse": "curso 1"
+      },
+      {
+        "desiredCourse": "curso 1",
+        "requiredCourse": "curso 0"
+      },
+      {
+        "desiredCourse": "curso 2.1",
+        "requiredCourse": "curso 1"
+      },
+      {
+        "desiredCourse": "curso 3.1",
+        "requiredCourse": "curso 2.1"
+      }
+    ]
+  },
+
+  {
+    "userId": "30ecc27b-9df7-4dd3-b52f-d001e79bd035",
+    "courses": [
+      {
+        "desiredCourse": "PortfolioConstruction",
+        "requiredCourse": "PortfolioTheories"
+      },
+      {
+        "desiredCourse": "InvestmentManagement",
+        "requiredCourse": "Investment"
+      },
+      {
+        "desiredCourse": "Investment",
+        "requiredCourse": "Finance"
+      },
+      {
+        "desiredCourse": "PortfolioTheories",
+        "requiredCourse": "Investment"
+      },
+      {
+        "desiredCourse": "InvestmentStyle",
+        "requiredCourse": "InvestmentManagement"
+      }
+    ]
+  }
+]

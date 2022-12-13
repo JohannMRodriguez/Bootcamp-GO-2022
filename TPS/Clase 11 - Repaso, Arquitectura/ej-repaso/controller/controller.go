@@ -28,9 +28,3 @@ func GetCursos( ctx *gin.Context ) {
 	ctx.IndentedJSON(http.StatusOK, response)
 
 }
-
-func Saludar( ctx *gin.Context ) {
-	
-	response := (&service.Service{}).Saludar()
-	ctx.IndentedJSON(http.StatusOK, response)
-}
